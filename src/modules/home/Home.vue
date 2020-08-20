@@ -14,12 +14,7 @@
                 <a v-for="(n,index) in 26" :key="'link'+index" href="#" class="px-2">{{String.fromCharCode(index+65)}}</a>
             </div>
         </div>
-
-        <div class="vd-container">
-            <div class="row">
-
-            </div>
-        </div>
+        
     </div>
 </template>
 
