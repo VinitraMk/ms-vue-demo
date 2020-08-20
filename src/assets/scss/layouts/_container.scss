@@ -1,0 +1,9 @@
+.vd {
+    &-container {
+        height:calc(100% - 300px);
+        overflow-y:auto;
+        display: block;
+        margin:20px auto;
+        border-top:1px solid #CCCCCC;
+    }
+}
