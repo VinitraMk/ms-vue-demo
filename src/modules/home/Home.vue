@@ -9,10 +9,6 @@
                     </div>
                 </div>
             </form>
-
-            <div class="d-flex justify-content-center mt-4">
-                <a v-for="(n,index) in 26" :key="'link'+index" href="#" class="px-2">{{String.fromCharCode(index+65)}}</a>
-            </div>
         </div>
 
         <div class="vd-container">
