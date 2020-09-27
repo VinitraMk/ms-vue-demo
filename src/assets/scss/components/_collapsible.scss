@@ -1,0 +1,12 @@
+.vd {
+    &-collapsible {
+        max-height: 0;
+        transition: max-height 0.5s ease-in;
+        overflow: hidden;
+
+        &.active {
+            max-height:50px;
+            transition: max-height 0.5s ease-in;
+        }
+    }
+}
