@@ -19,22 +19,23 @@
                 </div>
             </form>
             <p>{{resultSummary}}</p>
+        </div>
 
-            <hr/>
-
-            {{movieList}}
+        <div class="vd-container">
+            <Card v-for="(movie,index) in movieList" :key="`${movie.Title}-${index}`" :title="movie.Title" :imgSrc="movie.Poster"/>
         </div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import Card from "../../components/card/Card";
 
 var apiUrl = "http://www.omdbapi.com/?i=tt3896198&apikey=37b8c8a7";
 export default {
     name:'Home',
     components: {
+        Card
     },
     data() {
         return {
@@ -60,6 +61,22 @@ export default {
         titleInputHandler(e) {
             this.titleInput = e.target.value;
         },
+        searchForTitle() {
+            if(this.titleInput!=="") {
+                let searchParam = this.titleInput;
+                if(this.titleInput.indexOf(" ")>-1) {
+                    searchParam = searchParam.split(" ").join("+")
+                }
+                let tempUrl = apiUrl + "&s="+searchParam;
+                axios.get(tempUrl).then((res)=>{
+                    console.log(res.data.search);
+                    this.movieList = [...res.data.Search];
+                });
+            }
+            else {
+                this.getData(apiUrl);
+            }
+        }
     },
     computed: {
         resultSummary() {
