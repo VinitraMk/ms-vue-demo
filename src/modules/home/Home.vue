@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <a href="#" class="d-block">Advanced Search</a>
-                <div class="d-inline-flex mt-2" v-if="showFilters">
+                <div class="d-inline-flex mt-2">
                     <label class="mr-2">Filter By</label>
                     <select class="form-control">
                         <option>--Select--</option>
