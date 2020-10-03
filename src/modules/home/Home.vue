@@ -1,7 +1,7 @@
 <template>
     <div class="my-4">
         <div class="container">
-            <form v-on:submit="searchForTitle()">
+            <form>
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for movies" v-model="searchString"/>
                     <div class="input-group-append">
