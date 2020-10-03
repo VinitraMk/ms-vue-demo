@@ -3,7 +3,7 @@
         <div class="container">
             <form v-on:submit="searchForTitle()">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for movies" :value="titleInput" @input="titleInputHandler($event)"/>
+                    <input type="text" class="form-control" placeholder="Search for movies" v-model="searchString"/>
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary">Search</button>
                     </div>
@@ -40,7 +40,7 @@ export default {
         return {
             movieList:[],
             showFilters:false,
-            titleInput:""
+            searchString:""
         }
     },
 
@@ -57,22 +57,7 @@ export default {
         toggleFilters() {
             this.showFilters = !this.showFilters;
         },
-        titleInputHandler(e) {
-            this.titleInput = e.target.value;
-        },
     },
-    computed: {
-        resultSummary() {
-            if(this.movieList.length===1) {
-                return "Showing 1 result";
-            }
-            else {
-                return `Showing ${this.movieList.length} results`;
-            }
-        }
-    }
-
-
 }
 </script>
 
