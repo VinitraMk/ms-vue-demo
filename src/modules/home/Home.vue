@@ -18,11 +18,11 @@
                     </select>
                 </div>
             </form>
-            <p>{{resultSummary}}</p>
-
-            <hr/>
-
-            {{movieList}}
+            <div class="vd-container">
+                <div class="row">
+                    {{movieList}}
+                </div>
+            </div>
         </div>
     </div>
 </template>
