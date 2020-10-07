@@ -37,8 +37,6 @@ let defaultId = "tt3896198";
 export default {
     name:'Home',
     components: {
-        //Card,
-        //Modal
     },
     data() {
         return {
