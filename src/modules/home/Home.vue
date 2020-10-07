@@ -8,8 +8,8 @@
                         <button type="submit" class="btn btn-primary" @click="searchForTitle($event)">Search</button>
                     </div>
                 </div>
-                <a href="#" class="d-block" v-on:click="toggleFilters()">Advanced Search</a>
-                <div class="d-inline-flex mt-2" v-if="showFilters">
+                <a href="#" class="d-block mb-2" v-on:click="toggleFilters()">Advanced Search</a>
+                <div class="vd-form-group vd-collapsible" :class="{active:showFilters}">
                     <label class="mr-2">Filter By</label>
                     <select class="form-control">
                         <option>--Select--</option>
