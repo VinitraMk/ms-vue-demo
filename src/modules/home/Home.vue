@@ -100,8 +100,8 @@ export default {
             console.log(tempUrl);
             axios.get(tempUrl).then((res)=>{
                 this.selectedMovie = res.data;
+                this.showModal = true;
             });
-            this.showModal = true;
         }
     },
     computed: {
