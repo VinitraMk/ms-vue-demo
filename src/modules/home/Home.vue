@@ -1,11 +1,11 @@
 <template>
     <div class="my-4">
         <div class="container">
-            <form v-on:submit="searchForTitle()">
+            <form>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for movies" :value="titleInput" @input="titleInputHandler($event)"/>
+                    <input type="text" class="form-control" placeholder="Search for movies" v-model="searchString"/>
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-primary" @click="searchForTitle($event)">Search</button>
                     </div>
                 </div>
                 <a href="#" class="d-block" v-on:click="toggleFilters()">Advanced Search</a>
@@ -22,26 +22,42 @@
         </div>
 
         <div class="vd-container">
-            <Card v-for="(movie,index) in movieList" :key="`${movie.Title}-${index}`" :title="movie.Title" :imgSrc="movie.Poster"/>
+            <div class="row">
+                <div class="col-md-2" v-for="(movie,index) in movieList" :key="`${movie.Title}-${index}`">
+                    <Card  :title="movie.Title" :imgSrc="movie.Poster" :id="movie.imdbID" v-on:showMore="showPlot"/>
+                </div>
+            </div>
         </div>
+        <Modal :showModal="showModal" v-on:onDismiss="closeModal" :title="selectedMovie.Title">
+            {{selectedMovie.Plot}}
+        </Modal>
     </div>
 </template>
 
 <script>
 import axios from "axios";
 import Card from "../../components/card/Card";
+import Modal from "../../components/modal/Modal";
 
 var apiUrl = "http://www.omdbapi.com/?i=tt3896198&apikey=37b8c8a7";
+let apiKey = "37b8c8a7";
+let ombdUrl = "http://www.omdbapi.com";
 export default {
     name:'Home',
     components: {
-        Card
+        Card,
+        Modal
     },
     data() {
         return {
             movieList:[],
             showFilters:false,
-            titleInput:""
+            searchString:"",
+            showModal:false,
+            selectedMovie:{
+                Title:"",
+                Plot:""
+            }
         }
     },
 
@@ -58,24 +74,34 @@ export default {
         toggleFilters() {
             this.showFilters = !this.showFilters;
         },
-        titleInputHandler(e) {
-            this.titleInput = e.target.value;
-        },
-        searchForTitle() {
-            if(this.titleInput!=="") {
-                let searchParam = this.titleInput;
-                if(this.titleInput.indexOf(" ")>-1) {
+        searchForTitle(e) {
+            e.preventDefault();
+            if(this.searchString!=="") {
+                let searchParam = this.searchString;
+                if(this.searchString.indexOf(" ")>-1) {
                     searchParam = searchParam.split(" ").join("+")
                 }
                 let tempUrl = apiUrl + "&s="+searchParam;
                 axios.get(tempUrl).then((res)=>{
-                    console.log(res.data.search);
+                    console.log(res.data);
                     this.movieList = [...res.data.Search];
                 });
             }
             else {
                 this.getData(apiUrl);
             }
+        },
+        closeModal() {
+            this.showModal = !this.showModal;
+        },
+        showPlot(id) {
+            console.log(id);
+            let tempUrl = `${ombdUrl}?i=${id}&apikey=${apiKey}`;
+            console.log(tempUrl);
+            axios.get(tempUrl).then((res)=>{
+                this.selectedMovie = res.data;
+            });
+            this.showModal = true;
         }
     },
     computed: {
