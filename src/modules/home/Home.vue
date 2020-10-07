@@ -43,11 +43,6 @@ export default {
             movieList:[],
             showFilters:false,
             searchString:"",
-            showModal:false,
-            selectedMovie:{
-                Title:"",
-                Plot:""
-            }
         }
     },
 
@@ -65,6 +60,9 @@ export default {
         toggleFilters() {
             this.showFilters = !this.showFilters;
         },
+        searchForTitle() {
+
+        }
     },
 }
 </script>
