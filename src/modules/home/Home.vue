@@ -5,7 +5,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for movies" v-model="searchString"/>
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary" @click="searchForTitle($event)">Search</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                 </div>
                 <a href="#" class="d-block" v-on:click="toggleFilters()">Advanced Search</a>
