@@ -60,9 +60,6 @@ export default {
         toggleFilters() {
             this.showFilters = !this.showFilters;
         },
-        searchForTitle() {
-
-        }
     },
 }
 </script>
