@@ -1,0 +1,35 @@
+.vd {
+    &-modal {
+        position: fixed;
+        background: rgba(0,0,0,0.5);
+        left:0;
+        top:0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-dialog {
+            background: #fff;
+            min-height: 100px;
+            width: 350px;
+            border-radius:5px;
+        }
+
+        &__header {
+            padding:20px 15px 0 15px;
+            border-bottom:1px solid #ccc;
+        }
+        &__title {
+            display: inline-block;
+            width: 90%;
+        }
+        &__body,&__footer {
+            padding:20px 15px;
+        }
+        &__footer {
+            text-align: right;
+        }
+    }
+}

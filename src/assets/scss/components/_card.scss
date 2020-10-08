@@ -1,0 +1,31 @@
+.vd {
+    &-card {
+        width:125px;
+        min-height: 270px;
+        border-radius:4px;
+        border:1px solid #CCCCCC;
+        display: inline-table;
+        margin:10px;
+        text-align: center;
+        padding-bottom:10px;
+
+        &:first-child {
+            margin-left:0;
+        }
+
+        &__img {
+            height:170px;
+            & > img {
+                height:100%;
+                width:100%;
+                object-fit: cover;
+            }
+        }
+
+        &__title {
+            font-size:12px;
+            text-align: center;
+            padding:5px 0;
+        }
+    }
+}
