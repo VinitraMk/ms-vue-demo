@@ -5,7 +5,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for movies" v-model="searchString"/>
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-primary" @click="searchForTitle($event)">Search</button>
                     </div>
                 </div>
                 <a href="#" class="d-block" v-on:click="toggleFilters()">Advanced Search</a>
@@ -22,7 +22,9 @@
 
         <div class="vd-container">
             <div class="row">
-                {{movieList}}
+                <div class="col-md-2" v-for="(movie,index) in movieList" :key="`movie-${index}`">
+                    <Card :title="movie.Title" :imgSrc="movie.Poster" :id="movie.imdbID" @viewMore="showPlot"></Card>
+                </div>
             </div>
         </div>
     </div>
@@ -30,6 +32,7 @@
 
 <script>
 import axios from "axios";
+import Card from "../../components/card/Card";
 
 let apiKey = "37b8c8a7";
 let omdbUrl = "http://www.omdbapi.com";
@@ -37,12 +40,14 @@ let defaultId = "tt3896198";
 export default {
     name:'Home',
     components: {
+        Card
     },
     data() {
         return {
             movieList:[],
             showFilters:false,
             searchString:"",
+            selectedMovie:undefined
         }
     },
 

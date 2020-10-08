@@ -13,5 +13,15 @@
 <script>
 export default {
     name:"Card",
+    props: {
+        title:String,
+        imgSrc:String,
+        id:String
+    },
+    methods: {
+        showDetails() {
+            this.$emit('viewMore',this.id);
+        }
+    }
 }
 </script>
