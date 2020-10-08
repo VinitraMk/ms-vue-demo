@@ -8,8 +8,8 @@
                         <button type="submit" class="btn btn-primary" @click="searchForTitle($event)">Search</button>
                     </div>
                 </div>
-                <a href="#" class="d-block mb-2" v-on:click="toggleFilters()">Advanced Search</a>
-                <div class="vd-form-group vd-collapsible" :class="{active:showFilters}">
+                <a href="#" class="d-block" @click="toggleFilters">Advanced Search</a>
+                <div class="d-inline-flex mt-2" v-if="showFilters">
                     <label class="mr-2">Filter By</label>
                     <select class="form-control">
                         <option>--Select--</option>
@@ -18,50 +18,41 @@
                     </select>
                 </div>
             </form>
-            <p>{{resultSummary}}</p>
         </div>
 
         <div class="vd-container">
             <div class="row">
-                <div class="col-md-2" v-for="(movie,index) in movieList" :key="`${movie.Title}-${index}`">
-                    <Card  :title="movie.Title" :imgSrc="movie.Poster" :id="movie.imdbID" v-on:showMore="showPlot"/>
+                <div class="col-md-2" v-for="(movie,index) in movieList" :key="`movie-${index}`">
+                    <Card :title="movie.Title" :imgSrc="movie.Poster" :id="movie.imdbID" @viewMore="showPlot"></Card>
                 </div>
             </div>
         </div>
-        <Modal :showModal="showModal" v-on:onDismiss="closeModal" :title="selectedMovie.Title">
-            {{selectedMovie.Plot}}
-        </Modal>
     </div>
 </template>
 
 <script>
 import axios from "axios";
 import Card from "../../components/card/Card";
-import Modal from "../../components/modal/Modal";
 
-var apiUrl = "http://www.omdbapi.com/?i=tt3896198&apikey=37b8c8a7";
 let apiKey = "37b8c8a7";
-let ombdUrl = "http://www.omdbapi.com";
+let omdbUrl = "http://www.omdbapi.com";
+let defaultId = "tt3896198";
 export default {
     name:'Home',
     components: {
-        Card,
-        Modal
+        Card
     },
     data() {
         return {
             movieList:[],
             showFilters:false,
             searchString:"",
-            showModal:false,
-            selectedMovie:{
-                Title:"",
-                Plot:""
-            }
+            selectedMovie:undefined
         }
     },
 
     mounted() {
+        let apiUrl = `${omdbUrl}?i=${defaultId}&apikey=${apiKey}`;
         this.getData(apiUrl);
     },
 
@@ -77,44 +68,19 @@ export default {
         searchForTitle(e) {
             e.preventDefault();
             if(this.searchString!=="") {
-                let searchParam = this.searchString;
-                if(this.searchString.indexOf(" ")>-1) {
-                    searchParam = searchParam.split(" ").join("+")
-                }
-                let tempUrl = apiUrl + "&s="+searchParam;
-                axios.get(tempUrl).then((res)=>{
-                    console.log(res.data);
+                let apiUrl = `${omdbUrl}?i=${defaultId}&apikey=${apiKey}&s=${this.searchString}`;
+                axios.get(apiUrl).then(res=>{
                     this.movieList = [...res.data.Search];
                 });
             }
-            else {
-                this.getData(apiUrl);
-            }
-        },
-        closeModal() {
-            this.showModal = !this.showModal;
         },
         showPlot(id) {
-            console.log(id);
-            let tempUrl = `${ombdUrl}?i=${id}&apikey=${apiKey}`;
-            console.log(tempUrl);
-            axios.get(tempUrl).then((res)=>{
+            let apiUrl = `${omdbUrl}?i=${id}&apikey=${apiKey}`;
+            axios.get(apiUrl).then(res=>{
                 this.selectedMovie = res.data;
                 this.showModal = true;
             });
         }
     },
-    computed: {
-        resultSummary() {
-            if(this.movieList.length===1) {
-                return "Showing 1 result";
-            }
-            else {
-                return `Showing ${this.movieList.length} results`;
-            }
-        }
-    }
-
-
 }
 </script>
