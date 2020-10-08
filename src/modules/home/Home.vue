@@ -22,9 +22,7 @@
 
         <div class="vd-container">
             <div class="row">
-                <div class="col-md-2" v-for="(movie,index) in movieList" :key="`movie-${index}`">
-                    <Card :title="movie.Title" :imgSrc="movie.Poster" :id="movie.imdbID" @viewMore="showPlot"></Card>
-                </div>
+                {{this.movieList}}
             </div>
         </div>
     </div>
@@ -32,7 +30,6 @@
 
 <script>
 import axios from "axios";
-import Card from "../../components/card/Card";
 
 let apiKey = "37b8c8a7";
 let omdbUrl = "http://www.omdbapi.com";
@@ -40,7 +37,6 @@ let defaultId = "tt3896198";
 export default {
     name:'Home',
     components: {
-        Card
     },
     data() {
         return {
