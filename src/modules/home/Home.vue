@@ -78,7 +78,6 @@ export default {
             let apiUrl = `${omdbUrl}?i=${id}&apikey=${apiKey}`;
             axios.get(apiUrl).then(res=>{
                 this.selectedMovie = res.data;
-                this.showModal = true;
             });
         }
     },
