@@ -40,14 +40,16 @@ let defaultId = "tt3896198";
 export default {
     name:'Home',
     components: {
-        Card
+        Card,
     },
     data() {
         return {
             movieList:[],
             showFilters:false,
             searchString:"",
-            selectedMovie:undefined
+            selectedMovie:{
+                Title:""
+            },
         }
     },
 
@@ -79,7 +81,8 @@ export default {
             axios.get(apiUrl).then(res=>{
                 this.selectedMovie = res.data;
             });
-        }
+        },
+        
     },
 }
 </script>

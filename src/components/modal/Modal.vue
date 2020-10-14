@@ -8,7 +8,6 @@
                 </button>
             </div>
             <div class="vd-modal__body">
-                <slot></slot>
             </div>
             <div class="vd-modal__footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="closeModal">Close</button>
