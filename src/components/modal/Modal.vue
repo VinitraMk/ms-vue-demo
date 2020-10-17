@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         closeModal() {
-            this.$emit('onDismiss', arg1, arg2, arg3);
+            this.$emit('onDismiss');
         }
     }
 }
