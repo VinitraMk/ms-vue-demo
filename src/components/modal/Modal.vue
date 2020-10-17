@@ -8,8 +8,10 @@
                 </button>
             </div>
             <div class="vd-modal__body">
+                <slot></slot>
             </div>
             <div class="vd-modal__footer">
+                <slot></slot>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="closeModal">Close</button>
             </div>
         </div>
@@ -18,6 +20,15 @@
 
 <script>
 export default {
-    name:'Modal'
+    name:'Modal',
+    props: {
+        title:String,
+        showModal:Boolean
+    },
+    methods: {
+        closeModal() {
+            this.$emit('onDismiss', arg1, arg2, arg3);
+        }
+    }
 }
 </script>
