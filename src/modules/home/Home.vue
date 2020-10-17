@@ -27,12 +27,16 @@
                 </div>
             </div>
         </div>
+        <Modal :title="selectedMovie.Title" :showModal="displayModal" @onDismiss="closeModal">
+            <p>{{selectedMovie.Plot}}</p>
+        </Modal>
     </div>
 </template>
 
 <script>
 import axios from "axios";
 import Card from "../../components/card/Card";
+import Modal from "../../components/modal/Modal";
 
 let apiKey = "37b8c8a7";
 let omdbUrl = "http://www.omdbapi.com";
@@ -40,14 +44,18 @@ let defaultId = "tt3896198";
 export default {
     name:'Home',
     components: {
-        Card
+        Card,
+        Modal
     },
     data() {
         return {
             movieList:[],
             showFilters:false,
             searchString:"",
-            selectedMovie:undefined
+            selectedMovie:{
+                Title:""
+            },
+            displayModal:false
         }
     },
 
@@ -78,7 +86,11 @@ export default {
             let apiUrl = `${omdbUrl}?i=${id}&apikey=${apiKey}`;
             axios.get(apiUrl).then(res=>{
                 this.selectedMovie = res.data;
+                this.displayModal = true;
             });
+        },
+        closeModal() {
+            this.displayModal = false;
         }
     },
 }

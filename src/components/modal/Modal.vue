@@ -19,6 +19,15 @@
 
 <script>
 export default {
-    name:'Modal'
+    name:'Modal',
+    props: {
+        title:String,
+        showModal:Boolean
+    },
+    methods: {
+        closeModal() {
+            this.$emit('onDismiss');
+        }
+    }
 }
 </script>
