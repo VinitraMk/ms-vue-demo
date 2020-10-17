@@ -11,7 +11,6 @@
                 <slot></slot>
             </div>
             <div class="vd-modal__footer">
-                <slot></slot>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="closeModal">Close</button>
             </div>
         </div>
